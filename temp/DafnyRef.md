@@ -2840,13 +2840,11 @@ natural numbers can be defined by the equation
 ~
 -->
 
-With the understanding that the argument 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=n">
-is universally
+With the understanding that the argument $n$ is universally
 quantified, we can write this equation equivalently as
 
 ~ Equation {#eq-fib}
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)">
+$\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)">
 ~
 
 
@@ -2858,42 +2856,28 @@ Let's consider two ways to make sure we're defining the function uniquely.
 
 ### Well-founded Functions
 
-A standard way to ensure that equation [#eq-general] has a unique solution in 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f">
-is
+A standard way to ensure that equation [#eq-general] has a unique solution in $f$ is
 to make sure the recursion is well-founded, which roughly means that the
 recursion terminates.  This is done by introducing any well-founded
-relation 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\ll">
-on the domain of 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f">
-and making sure that the argument to each recursive
+relation $\ll$ on the domain of $f$ and making sure that the argument to each recursive
 call goes down in this ordering.  More precisely, if we formulate [#eq-general] as
 
-~ Equation <img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f(x) = \mathcal{F}{'}(f)">
+~ Equation $$f(x) = \mathcal{F}{'}(f)$$
 ~
 
-then we want to check 
-<img ALIGN=bottom src="https://render.githubusercontent.com/render/math?math=E \ll x">
-for each call 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f(E)">
-in 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f(x) = \mathcal{F}'(f)">.
+then we want to check $E \ll x$ for each call $f(E)$ in $f(x) = \mathcal{F}'(f)$.
 When a function
 definition satisfies  this _decrement condition_, then the function is said to be
 _well-founded_.
 
-For example, to check the decrement condition for 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathit{fib}">
-in [#eq-fib], we can pick
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\ll">
+For example, to check the decrement condition for $\mathit{fib}$
+in [#eq-fib], we can pick $\ll$
 to be the arithmetic less-than relation on natural numbers and check the
-following, for any 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=n">:
+following, for any $n$:
 
 
 ~ Equation 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=2 \leq n \:\Longrightarrow\: n-2 \ll n \:\wedge\: n-1 \ll n">
+$$2 \leq n \:\Longrightarrow\: n-2 \ll n \:\wedge\: n-1 \ll n$$
 ~
 
 
