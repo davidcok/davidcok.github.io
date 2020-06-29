@@ -1,3 +1,7 @@
+<script async
+  src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 <!--madoko
 Title       : Dafny Reference Manual
 Title Note  : draft, &date; &time;
@@ -84,6 +88,9 @@ Css Header  : body { text-rendering=optimizeLegibility }
 </style>
 
 ~ MathDefs
+
+-->
+$$
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\Equal}{\;\;\;=\;\;\;}
 \newcommand{\Equiv}{\;\;\equiv\;\;}
@@ -133,9 +140,8 @@ Css Header  : body { text-rendering=optimizeLegibility }
 \renewcommand{\dfrac}[2]{%
    \displaystyle\genfrac{}{}{0.4pt}1{\displaystyle #1}{\displaystyle #2}%
 }
-~
 
--->
+$$
 
 <Huge><center>
 Dafny Reference Manual
@@ -1428,14 +1434,14 @@ What does "effective decreases clause" mean? Dafny always appends a
 "top" element to the lexicographic tuple given by the user. This top
 element cannot be syntactically denoted in a Dafny program and it never
 occurs as a run-time value either. Rather, it is a fictitious value,
-which here we will denote \top, such that each value that can ever occur
-in a Dafny program is strictly less than \top. Dafny sometimes also
+which here we will denote $\top$, such that each value that can ever occur
+in a Dafny program is strictly less than $\top$. Dafny sometimes also
 prepends expressions to the lexicographic tuple given by the user. The
 effective decreases clause is any such prefix, followed by the
-user-provided decreases clause, followed by \top. We said "user-provided
+user-provided decreases clause, followed by $\top$. We said "user-provided
 decreases clause", but if the user completely omits a "decreases" clause,
 then Dafny will usually make a guess at one, in which case the effective
-decreases clause is any prefix followed by the guess followed by \top.
+decreases clause is any prefix followed by the guess followed by $\top$.
 (If you're using the Dafny IDE in Visual Studio, you can hover the mouse
 over the name of a recursive function or method, or the "while" keyword
 for a loop, to see the "decreases" clause that Dafny guessed, if any.)
@@ -1451,7 +1457,7 @@ function Fib(n: nat) : nat
 ```
 
 In this example, if you hover your mouse over the function name
-you will see that Dafny has supplied a `**decreases** n` clause.
+you will see that Dafny has supplied a `decreases n` clause.
 
 Let's take a look at the kind of example where a mysterious-looking
 decreases clause like "Rank, 0" is useful.
@@ -1513,7 +1519,7 @@ lexicographic tuple `"x-1, 1"` is strictly smaller than `"x, 0"`.
  another).
 
  We can simplify things a little bit by remembering that Dafny appends
- \top to the user-supplied decreases clause. For the A-and-B example,
+ $\top$ to the user-supplied decreases clause. For the A-and-B example,
  this lets us drop the constant from the **decreases** clause of A:
 
 ```
@@ -1524,14 +1530,14 @@ method B(x: nat)
   decreases x, 0
 ```
 
-The effective decreases clause of `A` is `"x, \top"` and the effective
-decreases clause of `B` is `"x, 0, \top"`. These tuples still satisfy the two
-conditions `(x, 0, \top) < (x, \top)` and `(x-1, \top) < (x, 0, \top)`. And
-as before, the constant "0" is arbitrary; anything less than \top (which
+The effective decreases clause of `A` is \"$x, \top$\" and the effective
+decreases clause of `B` is \"$x, 0, \top$\". These tuples still satisfy the two
+conditions $(x, 0, \top) < (x, \top)$ and $(x-1, \top) < (x, 0, \top)$. And
+as before, the constant "0" is arbitrary; anything less than $\top$ (which
 is any Dafny expression) would work.
 
 Let's take a look at one more example that better illustrates the utility
-of `\top`. Consider again two mutually recursive methods, call them `Outer`
+of $\top$. Consider again two mutually recursive methods, call them `Outer`
 and `Inner`, representing the recursive counterparts of what iteratively
 might be two nested loops:
 ```
@@ -1561,10 +1567,10 @@ Using a **decreases** clause `"x, y"` for `Inner` seems natural, but if
 we don't have any bound on the size of the `"y"` computed by `Outer`,
 there is no expression we can write in **decreases** clause of `Outer`
 that is sure to lead to a strictly smaller value for `"y"` when `Inner`
-is called. `\top` to the rescue. If we arrange for the effective
-decreases clause of `Outer` to be `"x, \top"` and the effective decreases
-clause for `Inner` to be `"x, y, \top"`, then we can show the strict
-decreases as required. Since `\top` is implicitly appended, the two
+is called. $\top$ to the rescue. If we arrange for the effective
+decreases clause of `Outer` to be $\mathtt{"x, \top"}$ and the effective decreases
+clause for `Inner` to be $\mathtt{"x, y, \top"}$, then we can show the strict
+decreases as required. Since $\top$ is implicitly appended, the two
 decreases clauses declared in the program text can be:
 ```
 method Outer(x: nat)
@@ -2832,19 +2838,13 @@ a _predicate_.
 
 For example, the common Fibonacci function over the
 natural numbers can be defined by the equation
-
-<!--
-~ Equation
-  \fib \Equal
-  \lambda n \bullet\; \ite{n < 2}{n}{\fib(n-2) + \fib(n-1)}
-~
--->
+$$\mathit{fib} = \lambda n \bullet\: \mathbf{if}\:n < 2 \:\mathbf{then}\: n \:\mathbf{else}\: \mathit{fib}(n-2) + \mathit{fib}(n-1)$$
 
 With the understanding that the argument $n$ is universally
 quantified, we can write this equation equivalently as
 
 ~ Equation {#eq-fib}
-$\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)">
+$$\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)$$
 ~
 
 
@@ -2861,9 +2861,7 @@ to make sure the recursion is well-founded, which roughly means that the
 recursion terminates.  This is done by introducing any well-founded
 relation $\ll$ on the domain of $f$ and making sure that the argument to each recursive
 call goes down in this ordering.  More precisely, if we formulate [#eq-general] as
-
-~ Equation $$f(x) = \mathcal{F}{'}(f)$$
-~
+$$f(x) = \mathcal{F}{'}(f)$$
 
 then we want to check $E \ll x$ for each call $f(E)$ in $f(x) = \mathcal{F}'(f)$.
 When a function
@@ -2874,15 +2872,10 @@ For example, to check the decrement condition for $\mathit{fib}$
 in [#eq-fib], we can pick $\ll$
 to be the arithmetic less-than relation on natural numbers and check the
 following, for any $n$:
-
-
-~ Equation 
-$$2 \leq n \:\Longrightarrow\: n-2 \ll n \:\wedge\: n-1 \ll n$$
-~
-
+$$2 \leq n \Imp n-2 \ll n \And n-1 \ll n$$
 
 Note that we are entitled to use the antecedent 
-<img ALIGN=bottom src="https://render.githubusercontent.com/render/math?math=2 \leq n"> because that is the
+$2 \leq n$ because that is the
 condition under which the else branch in [#eq-fib] is evaluated.
 
 A well-founded function is often thought of as "terminating" in the sense
@@ -2890,19 +2883,15 @@ that the recursive _depth_ in evaluating $f$
 on any given argument is finite.  That is, there are no infinite descending chains
 of recursive calls.  However, the evaluation of $f$ on a given argument
 may fail to terminate, because its _width_ may be infinite.  For example, let $P$
-be some predicate defined on the ordinals and let $\\PDownward$ be a predicate on the
+be some predicate defined on the ordinals and let $\mathit{PDownward}$ be a predicate on the
 ordinals defined by the following equation:
 
-<!--
-~ Equation
-  \PDownward(o)  \Equal
-  P(o) \And \forall p \bullet\; p \Less o \Imp \PDownward(p)
-~
--->
+$$\mathit{PDownward}(o) = P(o) \;\wedge\; \forall p \bullet\; p \Less o \Imp \mathit{PDownward}(p)$$
+
 
 With $\\Less$ as the usual ordering on ordinals, this equation satisfies the decrement
-condition, but evaluating $\\PDownward(\omega)$ would require evaluating
-$\\PDownward(n)$ for every natural number $n$.  However, what we are concerned
+condition, but evaluating $\mathit{PDownward}(\omega)$ would require evaluating
+$\mathit{PDownward}(n)$ for every natural number $n$.  However, what we are concerned
 about here is to avoid mathematical inconsistencies, and that is
 indeed a consequence of the decrement condition.
 
@@ -2974,9 +2963,9 @@ This equation has four solutions in $g$.  With $w$ ranging over the integers, th
 <!--
 ~ Equation
   \begin{array}{r@{}l}
-  g(x) \Equiv{}&  x \in \{w \;|\; 0 \leq w \And w\textrm{ even}\} \\
+  g(x) \Equiv{}&  x \in \{w \;|\; 0 \leq w \;\wedge\; w\textrm{ even}\} \\
   g(x) \Equiv{}&  x \in \{w \;|\; w\textrm{ even}\} \\
-  g(x) \Equiv{}&  x \in \{w \;|\; (0 \leq w \And w\textrm{ even}) \Or w\textrm{ odd}\} \\
+  g(x) \Equiv{}&  x \in \{w \;|\; (0 \leq w \;\wedge\; w\textrm{ even}) \Or w\textrm{ odd}\} \\
   g(x) \Equiv{}&  x \in \{w \;|\; \true\}
   \end{array}
 ~
@@ -3152,14 +3141,14 @@ _inductive datatype_.
 For this reason, least solutions like $g\\least$ have been given the
 name _inductive predicate_.
 
-Let's prove $g\\least(x) \\Imp 0 \leq x \And x \textrm{ even}$.
+Let's prove $g\\least(x) \\Imp 0 \leq x \;\wedge\; x \textrm{ even}$.
 We split our task into two cases, corresponding to which of the two
 proof rules in [#g-ind-rule] was the
 last one applied to establish $g\\least(x)$.  If it was the left-hand rule, then $x=0$,
 which makes it easy to establish the conclusion of our proof goal.  If it was the
 right-hand rule, then we unfold the proof tree one level and obtain $g\\least(x-2)$.
 Since the proof tree for $g\\least(x-2)$ is smaller than where we started, we invoke
-the _induction hypothesis_ and obtain $0 \leq (x-2) \And (x-2) \textrm{ even}$, from which
+the _induction hypothesis_ and obtain $0 \leq (x-2) \;\wedge\; (x-2) \textrm{ even}$, from which
 it is easy to establish the conclusion of our proof goal.
 
 Here's how we do the proof formally using [#eq-least-is-exists].  We massage the
@@ -3173,12 +3162,12 @@ general form of our proof goal:
 |   | $\forall k \bullet\; (\\iter{f}_k(x) \\Imp R)$                              |
 
 The last line can be proved by induction over $k$.  So, in our case, we prove
-$\\iter{g}_k(x) \\Imp 0 \leq x \And x \textrm{ even}$ for every $k$.
+$\\iter{g}_k(x) \\Imp 0 \leq x \;\wedge\; x \textrm{ even}$ for every $k$.
 If $k=0$, then $\\iter{g}_k(x)$ is $\\false$, so our goal holds trivially.
 If $k > 0$, then $\\iter{g}_k(x) = (x = 0 \\Or \\iter{g}_{k-1}(x-2))$.  Our goal holds easily
 for the first disjunct ($x=0$).  For the other disjunct,
 we apply the induction hypothesis (on the smaller $k-1$ and with $x-2$) and
-obtain $0 \leq (x-2) \And (x-2) \textrm{ even}$, from which our proof goal
+obtain $0 \leq (x-2)\;\wedge\; (x-2) \textrm{ even}$, from which our proof goal
 follows.
 
 #### Example with Greatest Solution {#sec-example-greatest-solution}
