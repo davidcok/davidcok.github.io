@@ -2,6 +2,17 @@
   src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+<!-- TODO
+Placement of TOC
+Numbered headings
+Some equations
+Equation numbering and references
+Internal links and references
+References/bibliography
+Separate into files
+
+-->
+
 <!--madoko
 Title       : Dafny Reference Manual
 Title Note  : draft, &date; &time;
@@ -89,8 +100,7 @@ Css Header  : body { text-rendering=optimizeLegibility }
 
 ~ MathDefs
 
--->
-$$
+
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\Equal}{\;\;\;=\;\;\;}
 \newcommand{\Equiv}{\;\;\equiv\;\;}
@@ -141,7 +151,7 @@ $$
    \displaystyle\genfrac{}{}{0.4pt}1{\displaystyle #1}{\displaystyle #2}%
 }
 
-$$
+-->
 
 <Huge><center>
 Dafny Reference Manual
@@ -2801,39 +2811,35 @@ The encoding for coinductive predicates in Dafny was described previously
 
 ## Function Definitions
 
-To define a function 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f \colon X \to Y">
- in terms of itself, one can
+To define a function $f \colon X \to Y$ in terms of itself, one can
 write an equation like
 
 ~ Equation {#eq-general}
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f = \mathcal{F}(f)">  
+$$f = \mathcal{F}(f)$$  
 ~
 
-where 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathcal{F}">
-is a non-recursive function of type
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=(X \to Y) \to X \to Y">.  
+where $\mathcal{F}$ is a non-recursive function of type
+$(X \to Y) \to X \to Y$.  
 Because it takes a function as an argument,
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathcal{F}">
+$\mathcal{F}$
 is referred to as a _functor_ (or _functional_, but not to be
 confused by the category-theory notion of a functor).
 Throughout, I will assume that 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathcal{F}(f)">
+$\mathcal{F}(f)$
 by itself is well defined,
 for example that it does not divide by zero.  I will also assume that 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f">
+$f$
 occurs
 only in fully applied calls in 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=\mathcal{F}(f)">;
+$\mathcal{F}(f)$;
  eta expansion can be applied to
 ensure this.  If 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f">
-is a \texttt{boolean] function, that is, if 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=Y">
+$f$
+is a `boolean` function, that is, if 
+$Y$
 is
 the type of booleans, then I call 
-<img ALIGN=absmiddle src="https://render.githubusercontent.com/render/math?math=f">
+$f$
 a _predicate_.
 
 For example, the common Fibonacci function over the
@@ -2872,7 +2878,7 @@ For example, to check the decrement condition for $\mathit{fib}$
 in [#eq-fib], we can pick $\ll$
 to be the arithmetic less-than relation on natural numbers and check the
 following, for any $n$:
-$$2 \leq n \Imp n-2 \ll n \And n-1 \ll n$$
+$$2 \leq n \;\Longrightarrow\; n-2 \ll n \;\wedge\; n-1 \ll n$$
 
 Note that we are entitled to use the antecedent 
 $2 \leq n$ because that is the
@@ -2886,10 +2892,10 @@ may fail to terminate, because its _width_ may be infinite.  For example, let $P
 be some predicate defined on the ordinals and let $\mathit{PDownward}$ be a predicate on the
 ordinals defined by the following equation:
 
-$$\mathit{PDownward}(o) = P(o) \;\wedge\; \forall p \bullet\; p \Less o \Imp \mathit{PDownward}(p)$$
+$$\mathit{PDownward}(o) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{PDownward}(p)$$
 
 
-With $\\Less$ as the usual ordering on ordinals, this equation satisfies the decrement
+With $\ll$ as the usual ordering on ordinals, this equation satisfies the decrement
 condition, but evaluating $\mathit{PDownward}(\omega)$ would require evaluating
 $\mathit{PDownward}(n)$ for every natural number $n$.  However, what we are concerned
 about here is to avoid mathematical inconsistencies, and that is
@@ -2898,15 +2904,15 @@ indeed a consequence of the decrement condition.
 #### Example with Well-founded Functions {#sec-fib-example}
 
 So that we can later see how inductive proofs are done in Dafny, let's prove that
-for any $n$, $\\fib(n)$ is even iff $n$ is a multiple of $3$.
+for any $n$, $\mathit{fib}(n)$ is even iff $n$ is a multiple of $3$.
 We split our task into
 two cases.  If $n < 2$, then the property follows directly from the definition
-of $\\fib$.  Otherwise, note that exactly one of the three numbers $n-2$, $n-1$, and $n$
+of $\mathit{fib}$.  Otherwise, note that exactly one of the three numbers $n-2$, $n-1$, and $n$
 is a multiple of 3.  If $n$ is the multiple of 3, then by invoking the
 induction hypothesis on $n-2$
-and $n-1$, we obtain that $\\fib(n-2) + \\fib(n-1)$ is the sum of two odd numbers,
+and $n-1$, we obtain that $\mathit{fib}(n-2) + \mathit{fib}(n-1)$ is the sum of two odd numbers,
 which is even.  If $n-2$ or $n-1$ is a multiple of 3, then by invoking the induction
-hypothesis on $n-2$ and $n-1$, we obtain that $\\fib(n-2) + \\fib(n-1)$ is the sum of an
+hypothesis on $n-2$ and $n-1$, we obtain that $\mathit{fib}(n-2) + \mathit{fib}(n-1)$ is the sum of an
 even number and an odd number, which is odd.  In this proof, we invoked the induction
 hypothesis on $n-2$ and on $n-1$.  This is allowed, because both are smaller than
 $n$, and hence the invocations go down in the well-founded ordering on natural numbers.
@@ -2918,58 +2924,56 @@ solutions---instead, we can just be clear about which one of them we want.
 Let's explore this, after a smidgen of lattice theory.
 
 For any complete lattice $(Y,\leq)$ and any set $X$, we can by _pointwise extension_ define
-a complete lattice $(X \\to Y, \\FBelow)$, where for any $f,g \colon X \to Y$,
+a complete lattice $(X \to Y, \dot{\Rightarrow})$, where for any $f,g \colon X \to Y$,
 
-<!--
-~ Equation
-  f \FBelow q  \Equiv
-  \forall x \bullet\; f(x) \leq g(x)
-~
--->
 
-In particular, if $Y$ is the set of booleans ordered by implication ($\\false \\leq \\true$),
+Equation
+$$f \dot{\Rightarrow} q  \;\;\equiv\;\; \forall x \bullet\; f(x) \leq g(x)$$
+
+
+
+In particular, if $Y$ is the set of booleans ordered by implication (`false` $\leq$ `true`),
 then the set of predicates over any domain $X$ forms a complete lattice.
 Tarski's Theorem [@Tarski:theorem] tells us that any monotonic function over a
 complete lattice has a least and a greatest fixpoint.  In particular, this means that
-$\\F$ has a least fixpoint and a greatest fixpoint, provided $\\F$ is monotonic.
+$\\F$ has a least fixpoint and a greatest fixpoint, provided $\mathcal{F}$ is monotonic.
 
 Speaking about the _set of solutions_ in $f$ to [#eq-general] is the same as speaking
-about the _set of fixpoints_ of functor $\\F$.  In particular, the least and greatest
-solutions to [#eq-general] are the same as the least and greatest fixpoints of $\\F$.
+about the _set of fixpoints_ of functor $\mathcal{F}$.  In particular, the least and greatest
+solutions to [#eq-general] are the same as the least and greatest fixpoints of $\mathcal{F}$.
 In casual speak, it happens that we say "fixpoint of [#eq-general]", or more
-grotesquely, "fixpoint of $f$" when we really mean "fixpoint of $\\F$".
+grotesquely, "fixpoint of $f$" when we really mean "fixpoint of $\mathcal{F}$".
 
 In conclusion of our little excursion into lattice theory, we have that, under the
-proviso of $\\F$ being monotonic, the set of solutions in $f$ to [#eq-general] is nonempty,
-and among these solutions, there is in the $\\FBelow$ ordering a least solution (that is,
-a function that returns $\\false$ more often than any other) and a greatest solution (that
-is, a function that returns $\\true$ more often than any other).
+proviso of $\mathcal{F}$ being monotonic, the set of solutions in $f$ to [#eq-general] is nonempty,
+and among these solutions, there is in the $\dot{\Rightarrow}$ ordering a least solution (that is,
+a function that returns `false` more often than any other) and a greatest solution (that
+is, a function that returns `true` more often than any other).
 
 When discussing extreme solutions, I will now restrict my attention to boolean functions
-(that is, with $Y$ being the type of booleans).  Functor $\\F$ is monotonic
-if the calls to $f$ in $\\F'(f)$ are in _positive positions_ (that is, under an even number
+(that is, with $Y$ being the type of booleans).  Functor $\mathcal{F}$ is monotonic
+if the calls to $f$ in $\mathcal{F}'(f)$ are in _positive positions_ (that is, under an even number
 of negations).  Indeed, from now on, I will restrict my attention to such monotonic
-functors $\\F$.
+functors $\mathcal{F}$.
 
 Let me introduce a running example.  Consider the following equation,
 where $x$ ranges over the integers:
 
 ~ Equation {#eq-EvenNat}
-  g(x) \\Equal (x = 0 \\Or g(x-2))
+$$  g(x) = (x = 0 \:\vee\: g(x-2))$$
 ~
 
 This equation has four solutions in $g$.  With $w$ ranging over the integers, they are:
 
-<!--
-~ Equation
-  \begin{array}{r@{}l}
-  g(x) \Equiv{}&  x \in \{w \;|\; 0 \leq w \;\wedge\; w\textrm{ even}\} \\
-  g(x) \Equiv{}&  x \in \{w \;|\; w\textrm{ even}\} \\
-  g(x) \Equiv{}&  x \in \{w \;|\; (0 \leq w \;\wedge\; w\textrm{ even}) \Or w\textrm{ odd}\} \\
-  g(x) \Equiv{}&  x \in \{w \;|\; \true\}
-  \end{array}
-~
--->
+
+Equation
+  $$\begin{array}{r@{}l}
+  g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; 0 \leq w \;\wedge\; w\textrm{ even}\} \\
+  g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; w\textrm{ even}\} \\
+  g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; (0 \leq w \;\wedge\; w\textrm{ even}) \:\vee\: w\textrm{ odd}\} \\
+  g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; \mathit{true}\}
+  \end{array}$$
+
 
 The first of these is the least solution and the last is the greatest solution.
 
@@ -2977,11 +2981,8 @@ In the literature, the definition of an extreme predicate is often given as a se
 _inference rules_.  To designate the least solution, a single line separating the
 antecedent (on top) from conclusion (on bottom) is used:
 
-~ Equation {#g-ind-rule}
-  \\frac{}{g(0)}
-  \\qquad\\qquad
-  \\frac{g(x-2)}{g(x)}
-~
+Equation {#g-ind-rule}
+  $\frac{}{g(0)} \qquad\qquad \frac{g(x-2)}{g(x)}$
 
 Through repeated applications of such rules, one can show that the predicate holds for
 a particular value.  For example, the _derivation_, or _proof tree_,
@@ -2990,18 +2991,20 @@ to the left in Figure [#fig-proof-trees] shows that $g(6)$ holds.
 The use of these inference rules gives rise to a least solution, because proof trees are
 accepted only if they are _finite_.
 
-<!--
+
 ~ Begin Figure { #fig-proof-trees caption="Left: a finite proof tree that uses the rules of [#g-ind-rule] to establish $g(6)$.  Right: an infinite proof tree that uses the rules of [#g-coind-rule] to establish $g(1)$." }
 ~ Begin Columns
 ~~ Column { vertical-align=bottom }
 ~ Math
-\dfrac{
+<!-- FIXME
+$\dfrac{
   \dfrac{
     \dfrac{
-      \dfrac{}{g(0)\xstrut}
-      }{g(2)\xstrut}
-    }{g(4)\xstrut}
-  }{g(6)\xupstrut}
+      \dfrac{}{g(0)\vrule height 9.4pt depth 4.6pt width 0pt\relax}
+      }{g(2)\vrule height 9.4pt depth 4.6pt width 0pt\relax}
+    }{g(4)\vrule height 9.4pt depth 4.6pt width 0pt\relax}
+  }{g(6)\vrule height 9.4pt depth 0pt width 0pt\relax}$
+  -->
 ~
 ~~
 ~~ Column { width=5em }
@@ -3009,7 +3012,8 @@ accepted only if they are _finite_.
 ~~
 ~~ Column { vertical-align=bottom }
 ~ Math
-\Dfrac{
+<!-- FIXME
+$\Dfrac{
   \Dfrac{
     \Dfrac{
       \Dfrac{
@@ -3017,23 +3021,26 @@ accepted only if they are _finite_.
         }{{g(-5)}}
       }{{g(-3)}}
     }{{g(-1)}}
-  }{g(1)}
+  }{g(1)}$
+  -->
 ~
 ~~
 ~ End Columns
 ~ End Figure
--->
+
 
 When inference rules are to designate the greatest solution, a double
 line is used:
 
-<!--
+
 ~ Equation {#g-coind-rule}
-  \Dfrac{}{g(0)}
+<!-- FIXME
+  $\Dfrac{}{g(0)}
   \qquad\qquad
-  \Dfrac{g(x-2)}{g(x)}
+  \Dfrac{g(x-2)}{g(x)}$
+  -->
 ~
--->
+
 
 In this case, proof trees are allowed to be infinite.  For example, the (partial depiction
 of the) infinite proof tree on the right in Figure [#fig-proof-trees] shows that $g(1)$ holds.
@@ -3051,80 +3058,78 @@ the recursive calls in the definition [#eq-EvenNat] to try to evaluate $g(7)$ wo
 terminate.  However, there are useful ways to establish that an extreme predicate holds
 and there are ways to make use of one once it has been established.
 
-For any $\\F$ as in [#eq-general], I define two infinite series of well-founded
-functions, $\\iter{f}_k$ and $\\Iter{f}_k$
+For any $\mathcal{F}$ as in [#eq-general], I define two infinite series of well-founded
+functions, ${{}^{\flat}\!f}_k$ and ${{}^{\sharp}\!f}_k$
 where $k$ ranges over the natural numbers:
 
-<!--
+<!-- FIXME
 ~ Equation {#eq-least-approx}
-  \iter{f}_k(x) \Equal \left\{
+  $${{}^{\flat}\!f}_k(x) = \left\{
     \begin{array}{ll}
-      \false         & \textrm{if } k = 0 \\
-      \F(\iter{f}_{k-1})(x) & \textrm{if } k > 0
+      \mathit{false}         & \textrm{if } k = 0 \\
+      \mathcal{F}({{}^{\flat}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
-    \right.
+     \right\} $$.
 ~
 ~ Equation {#eq-greatest-approx}
-  \Iter{f}_k(x) \Equal \left\{
+  $${{}^{\sharp}\!f}_k(x) = \left$\{
     \begin{array}{ll}
-      \true          & \textrm{if } k = 0 \\
-      \F(\Iter{f}_{k-1})(x) & \textrm{if } k > 0
+      \mathit{true}          & \textrm{if } k = 0 \\
+      \mathcal{F}({{}^{\sharp}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
-    \right.
+    \right\} $$.
 ~
 -->
 
 These functions are called the _iterates_ of $f$, and I will also refer to them
 as the _prefix predicates_ of $f$ (or the _prefix predicate_ of $f$, if we think
 of $k$ as being a parameter).
-Alternatively, we can define $\\iter{f}_k$ and $\\Iter{f}_k$ without mentioning $x$:
-Let $\\bot$ denote the function that always returns $\\false$, let $\\top$
-denote the function that always returns $\\true$, and let a superscript on $\\F$ denote
-exponentiation (for example, $\\F^0(f) = f$ and $\\F^2(f) = \\F(\\F(f))$).
+Alternatively, we can define ${{}^{\flat}\!f}_k$ and ${{}^{\sharp}\!f}_k$ without mentioning $x$:
+Let $\bot$ denote the function that always returns `false`$`, let $\top$
+denote the function that always returns `true`, and let a superscript on $\mathcal{F}$ denote
+exponentiation (for example, $\mathcal{F}^0(f) = f$ and $\mathcal{F}^2(f) = \mathcal{F}(\mathcal{F}(f))$).
 Then, [#eq-least-approx] and [#eq-greatest-approx] can be stated equivalently as
-$\\iter{f}_k = \\F^k(\bot)$ and $\\Iter{f}_k = \\F^k(\\top)$.
+${{}^{\flat}\!f}_k = \mathcal{F}^k(\bot)$ and ${{}^{\sharp}\!f}_k = \mathcal{F}^k(\top)$.
 
 For any solution $f$ to equation [#eq-general], we have, for any $k$ and $\ell$
 such that $k \leq \ell$:
 
-<!--
-~ Equation {#eq-prefix-postfix}
-  \iter{f}_k    \quad\FBelow\quad
-  \iter{f}_\ell \quad\FBelow\quad
-  f      \quad\FBelow\quad
-  \Iter{f}_\ell \quad\FBelow\quad
-  \Iter{f}_k
-~
--->
 
-In other words, every $\\iter{f}_k$ is a _pre-fixpoint_ of $f$ and every $\\Iter{f}_k$ is a _post-fixpoint_
-of $f$.  Next, I define two functions, $f\\least$ and $f\\greatest$, in
+~ Equation {#eq-prefix-postfix}
+  $${{}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
+  {{}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
+  f      \quad\;\dot{\Rightarrow}\;\quad
+  {{}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
+  {{}^{\sharp}\!f}_k$$
+~
+
+In other words, every ${{}^{\flat}\!f}_k$ is a _pre-fixpoint_ of $f$ and every ${{}^{\sharp}\!f}_k$ is a _post-fixpoint_
+of $f$.  Next, I define two functions, $f^{\downarrow}$ and $f^{\uparrow}$, in
 terms of the prefix predicates:
 
-<!--
-~ Equation {#eq-least-is-exists}
-  f\least(x) \Equal  \exists k \bullet\; \iter{f}_k(x)
-~
-~ Equation {#eq-greatest-is-forall}
-  f\greatest(x) \Equal  \forall k \bullet\; \Iter{f}_k(x)
-~
--->
 
-By [#eq-prefix-postfix], we also have that $f\\least$ is a pre-fixpoint of $\\F$ and $f\\greatest$
-is a post-fixpoint of $\\F$.  The marvelous thing is that, if $\\F$ is _continuous_, then
-$f\\least$ and $f\\greatest$ are the least and greatest fixpoints of $\\F$.
+Equation {#eq-least-is-exists}
+$$  f^{\downarrow}(x) \;=\;  \exists k \bullet\; {{}^{\flat}\!f}_k(x) $$
+
+Equation {#eq-greatest-is-forall}
+ $$ f^{\uparrow}(x) \;=\;  \forall k \bullet\; {{}^{\sharp}\!f}_k(x) $$
+
+
+By [#eq-prefix-postfix], we also have that $f^{\downarrow}$ is a pre-fixpoint of $\mathcal{F}$ and $f^{\uparrow}$
+is a post-fixpoint of $\mathcal{F}$.  The marvelous thing is that, if $\mathcal{F}$ is _continuous_, then
+$f^{\downarrow}$ and $f^{\uparrow}$ are the least and greatest fixpoints of $\mathcal{F}$.
 These equations let us do proofs by induction when dealing with extreme predicates.
 I will explain in Section [#sec-friendliness] how to check for continuity.
 
 Let's consider two examples, both involving function $g$ in
 [#eq-EvenNat].  As it turns out, $g$'s defining functor is continuous,
-and therefore I will write $g\\least$ and $g\\greatest$ to denote the
+and therefore I will write $g^{\downarrow}$ and $g^{\uparrow}$ to denote the
 least and greatest solutions for $g$ in [#eq-EvenNat].
 
 #### Example with Least Solution {#sec-example-least-solution}
 
-The main technique for establishing that $g\\least(x)$ holds for some
-$x$, that is, proving something of the form $Q \\Imp g\\least(x)$, is to
+The main technique for establishing that $g^{\downarrow}(x)$ holds for some
+$x$, that is, proving something of the form $Q \;\Longrightarrow\; g^{\downarrow}(x)$, is to
 construct a proof tree like the one for $g(6)$ in Figure
 [#fig-proof-trees].  For a proof in this direction, since we're just
 applying the defining equation, the fact that
@@ -3132,22 +3137,22 @@ we're using a least solution for $g$ never plays a role (as long as we
 limit ourselves to finite derivations).
 
 The technique for going in the other direction, proving something _from_ an established
-$g\\least$ property, that is, showing something of the form $g\\least(x) \\Imp R$, typically
+$g^{\downarrow}$ property, that is, showing something of the form $g^{\downarrow}(x) \;\Longrightarrow\; R$, typically
 uses induction on the structure of the proof tree.  When the antecedent of our proof
-obligation includes a predicate term $g\\least(x)$, it is sound to
-imagine that we have been given a proof tree for $g\\least(x)$.  Such a proof tree
+obligation includes a predicate term $g^{\downarrow}(x)$, it is sound to
+imagine that we have been given a proof tree for $g^{\downarrow}(x)$.  Such a proof tree
 would be a data structure---to be more precise, a term in an
 _inductive datatype_.
-For this reason, least solutions like $g\\least$ have been given the
+For this reason, least solutions like $g^{\downarrow}$ have been given the
 name _inductive predicate_.
 
-Let's prove $g\\least(x) \\Imp 0 \leq x \;\wedge\; x \textrm{ even}$.
+Let's prove $g^{\downarrow}(x) \;\Longrightarrow\; 0 \leq x \;\wedge\; x \textrm{ even}$.
 We split our task into two cases, corresponding to which of the two
 proof rules in [#g-ind-rule] was the
-last one applied to establish $g\\least(x)$.  If it was the left-hand rule, then $x=0$,
+last one applied to establish $g^{\downarrow}(x)$.  If it was the left-hand rule, then $x=0$,
 which makes it easy to establish the conclusion of our proof goal.  If it was the
-right-hand rule, then we unfold the proof tree one level and obtain $g\\least(x-2)$.
-Since the proof tree for $g\\least(x-2)$ is smaller than where we started, we invoke
+right-hand rule, then we unfold the proof tree one level and obtain $g^{\downarrow}(x-2)$.
+Since the proof tree for $g^{\downarrow}(x-2)$ is smaller than where we started, we invoke
 the _induction hypothesis_ and obtain $0 \leq (x-2) \;\wedge\; (x-2) \textrm{ even}$, from which
 it is easy to establish the conclusion of our proof goal.
 
@@ -3155,16 +3160,16 @@ Here's how we do the proof formally using [#eq-least-is-exists].  We massage the
 general form of our proof goal:
 
 |~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-|   | $f\\greatest(x) \\Imp R$                                                    |
+|   | $f^{\uparrow}(x) \;\Longrightarrow\; R$                                                    |
 | = | &nbsp;&nbsp;&nbsp;&nbsp; { [#eq-least-is-exists] }                        |
-|   | $(\\exists k \bullet\; \\iter{f}_k(x)) \\Imp R$                              |
-| = | &nbsp;&nbsp;&nbsp;&nbsp; { distribute $\\Imp$ over $\\exists$ to the left } |
-|   | $\forall k \bullet\; (\\iter{f}_k(x) \\Imp R)$                              |
+|   | $(\\exists k \bullet\; {{}^{\flat}\!f}_k(x)) \;\Longrightarrow\; R$                              |
+| = | &nbsp;&nbsp;&nbsp;&nbsp; { distribute $\;\Longrightarrow\;$ over $\exists$ to the left } |
+|   | $\forall k \bullet\; ({{}^{\flat}\!f}_k(x) \;\Longrightarrow\; R)$                              |
 
 The last line can be proved by induction over $k$.  So, in our case, we prove
-$\\iter{g}_k(x) \\Imp 0 \leq x \;\wedge\; x \textrm{ even}$ for every $k$.
-If $k=0$, then $\\iter{g}_k(x)$ is $\\false$, so our goal holds trivially.
-If $k > 0$, then $\\iter{g}_k(x) = (x = 0 \\Or \\iter{g}_{k-1}(x-2))$.  Our goal holds easily
+${{}^{\flat}\!g}_k(x) \;\Longrightarrow\; 0 \leq x \;\wedge\; x \textrm{ even}$ for every $k$.
+If $k = 0$, then ${{}^{\flat}\!g}_k(x)$ is `false`, so our goal holds trivially.
+If $k > 0$, then ${{}^{\flat}\!g}_k(x) = (x = 0 \:\vee\: {{}^{\flat}\!g}_{k-1}(x-2))$.  Our goal holds easily
 for the first disjunct ($x=0$).  For the other disjunct,
 we apply the induction hypothesis (on the smaller $k-1$ and with $x-2$) and
 obtain $0 \leq (x-2)\;\wedge\; (x-2) \textrm{ even}$, from which our proof goal
@@ -3172,20 +3177,20 @@ follows.
 
 #### Example with Greatest Solution {#sec-example-greatest-solution}
 
-We can think of a given predicate $g\\greatest(x)$ as being represented
+We can think of a given predicate $g^{\uparrow}(x)$ as being represented
 by a proof tree---in this case a term in a _coinductive datatype_,
 since the proof may be infinite.
-For this reason, greatest solutions like $g\\greatest$ have
+For this reason, greatest solutions like $g^{\uparrow}$ have
 been given the name _coinductive predicate_, or _co-predicate_ for short.
 The main technique for proving something from a given proof tree, that
-is, to prove something of the form $g\\greatest(x) \\Imp R$, is to
+is, to prove something of the form $g^{\uparrow}(x) \;\Longrightarrow\; R$, is to
 destruct the proof.  Since this is just unfolding the defining
 equation, the fact that we're using a greatest solution for $g$ never
 plays a role (as long as we limit ourselves to a finite number of
 unfoldings).
 
 To go in the other direction, to establish a predicate defined as a greatest solution,
-like $Q \\Imp g\\greatest(x)$, we may need an infinite number of steps.  For this purpose,
+like $Q \;\Longrightarrow\; g^{\uparrow}(x)$, we may need an infinite number of steps.  For this purpose,
 we can use induction's dual, _coinduction_.  Were it not for one little detail, coinduction
 is as simple as continuations in programming: the next part of the proof obligation
 is delegated to the _coinduction hypothesis_.  The little detail is making sure that
@@ -3199,9 +3204,9 @@ or a new attempt by Kozen and Silva
 that aims to emphasize the simplicity, not the mystery, of
 coinduction [@KozenSilva:Coinduction].
 
-Let's prove $\\true \\Imp g\\greatest(x)$.  The intuitive coinductive proof goes like this:
-According to the right-hand rule of [#g-coind-rule], $g\\greatest(x)$ follows if we
-establish $g\\greatest(x-2)$, and that's easy to do by invoking the coinduction hypothesis.
+Let's prove $\mathit{true} \;\Longrightarrow\; g^{\uparrow}(x)$.  The intuitive coinductive proof goes like this:
+According to the right-hand rule of [#g-coind-rule], $g^{\uparrow}(x)$ follows if we
+establish $g^{\uparrow}(x-2)$, and that's easy to do by invoking the coinduction hypothesis.
 The "little detail", productivity, is satisfied in this proof because we applied
 a rule in [#g-coind-rule] before invoking the coinduction hypothesis.
 
@@ -3211,18 +3216,18 @@ general form of our proof goal:
 
 <!--
 |~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-|   | $Q \\Imp f\\greatest(x)$                                                      |
+|   | $Q \;\Longrightarrow\; f^{\uparrow}(x)$                                                      |
 | = | &nbsp;&nbsp;&nbsp;&nbsp;  { [#eq-greatest-is-forall] }                      |
-|   | $Q \\Imp \forall k \bullet\; \\Iter{f}_k(x)$                                  |
-| = | &nbsp;&nbsp;&nbsp;&nbsp;  { distribute $\\Imp$ over $\forall$ to the right } |
-|   | $\forall k \bullet\; Q \\Imp \\Iter{f}_k(x)$                                  |
+|   | $Q \;\Longrightarrow\; \forall k \bullet\; {{}^{\sharp}\!f}_k(x)$                                  |
+| = | &nbsp;&nbsp;&nbsp;&nbsp;  { distribute $\;\Longrightarrow\;$ over $\forall$ to the right } |
+|   | $\forall k \bullet\; Q \;\Longrightarrow\; {{}^{\sharp}\!f}_k(x)$                                  |
 -->
 
 The last line can be proved by induction over $k$.  So, in our case, we prove
 <!--
-$\true \\Imp \\Iter{g}_k(x)$ for every $k$.
-If $k=0$, then $\\Iter{g}_k(x)$ is $\true$, so our goal holds trivially.
-If $k > 0$, then $\\Iter{g}_k(x) = (x = 0 \Or \Iter{g}_{k-1}(x-2))$.  We establish the second
+$\mathit{true} \;\Longrightarrow\; {{}^{\sharp}\!g}_k(x)$ for every $k$.
+If $k=0$, then ${{}^{\sharp}\!g}_k(x)$ is $\mathit{true}$, so our goal holds trivially.
+If $k > 0$, then ${{}^{\sharp}\!g}_k(x) = (x = 0 \:\vee\: {{}^{\sharp}\!g}_{k-1}(x-2))$.  We establish the second
 disjunct by applying the induction hypothesis (on the smaller $k-1$ and with $x-2$).
 -->
 
@@ -3231,7 +3236,7 @@ disjunct by applying the induction hypothesis (on the smaller $k-1$ and with $x-
 Although in this paper I consider only well-founded functions and extreme
 predicates, it is worth mentioning that there are additional ways of making sure that
 the set of solutions to [#eq-general] is nonempty.  For example, if all calls to $f$ in
-$\\F'(f)$ are _tail-recursive calls_, then (under the assumption that $Y$ is nonempty) the set of
+$\mathcal{F}'(f)$ are _tail-recursive calls_, then (under the assumption that $Y$ is nonempty) the set of
 solutions is nonempty.  To see this, consider an attempted evaluation of $f(x)$ that fails
 to determine a definite result value because of an infinite chain of calls that applies $f$
 to each value of some subset $X'$ of $X$.  Then, apparently, the value of $f$ for any one
@@ -3264,12 +3269,12 @@ function fib(n: nat): nat
 Dafny verifies that the body (given as an expression in curly braces) is well defined.
 This includes decrement checks for recursive (and mutually recursive) calls.  Dafny
 predefines a well-founded relation on each type and extends it to lexicographic tuples
-of any (fixed) length.  For example, the well-founded relation $x \\Less y$ for integers
-is $x < y \And 0 \leq y$, the one for reals is $x \leq y - 1.0 \And 0.0 \leq y$
+of any (fixed) length.  For example, the well-founded relation $x \ll y$ for integers
+is $x < y \;\wedge\; 0 \leq y$, the one for reals is $x \leq y - 1.0 \;\wedge\; 0.0 \leq y$
 (this is the same ordering as for integers, if you read the integer
-relation as $x \leq y - 1 \And 0 \leq y$), the one for inductive
+relation as $x \leq y - 1 \;\wedge\; 0 \leq y$), the one for inductive
 datatypes is structural inclusion,
-and the one for coinductive datatypes is $\\false$.
+and the one for coinductive datatypes is `false`.
 
 Using a `decreases` clause, the programmer can specify the term in this predefined
 order.  When a function definition omits a `decreases` clause, Dafny makes a simple
@@ -3331,7 +3336,7 @@ forall k | P(k)
 
 Logically, this statement corresponds to _universal introduction_: the body proves that
 `Q(k)` holds for an arbitrary `k` such that `P(k)`, and the conclusion of the `forall` statement
-is then $\forall k \bullet\; P(k) \\Imp Q(k)$.  When the body of the `forall` statement is
+is then $\forall k \bullet\; P(k) \;\Longrightarrow\; Q(k)$.  When the body of the `forall` statement is
 a single call (or `calc` statement), the `ensures` clause is inferred and can be omitted,
 like in our `FibProperty` example.
 
@@ -3352,7 +3357,7 @@ for any variable `x` and boolean expression `Q`, the
 _assign such that_ statement `x :| Q;` says to assign to `x` a value such that `Q`
 will hold.  A proof obligation when using this statement is to show that there
 exists an `x` such that `Q` holds.  For example, if the fact
-$\\exists k \bullet\; 100 \leq \\fib(k) < 200$ is known, then the statement
+$\\exists k \bullet\; 100 \leq \mathit{fib}(k) < 200$ is known, then the statement
 `k :| 100 <= fib(k) < 200;` will assign to `k` some value (chosen arbitrarily)
 for which `fib(k)` falls in the given range.
 
@@ -3369,7 +3374,7 @@ copredicate G(x: int) { x == 0 || G(x-2) }
 ```
 
 When Dafny receives either of these definitions, it automatically declares the corresponding
-prefix predicates.  Instead of the names $\\iter{g}_k$ and $\\Iter{g}_k$ that I used above, Dafny
+prefix predicates.  Instead of the names ${{}^{\flat}\!g}_k$ and ${{}^{\sharp}\!g}_k$ that I used above, Dafny
 names the prefix predicates `g#[k]` and `G#[k]`, respectively, that is, the name of
 the extreme predicate appended with `#`, and the subscript is given as an argument in
 square brackets.  The definition of the prefix predicate derives from the body of
@@ -7009,7 +7014,7 @@ QuantifierDomain =
 ````
 
 A ``QuantifierExpression`` is a boolean expression that specifies that a
-given expression (the one following the "::") is true for all (for
+given expression (the one following the `::`) is true for all (for
 **forall**) or some (for **exists**) combination of values of the
 quantified variables, namely those in the ``QuantifierDomain``.
 
@@ -7319,7 +7324,7 @@ value corresponding to a given destructor has the specified value.
 In a ``MemberBindingUpdate``, the ``ident`` or ``digits`` is the
 name of a destructor (i.e. formal parameter name) for one of the
 constructors of the datatype. The expression to the right of the
-":=" is the new value for that formal.
+`:=` is the new value for that formal.
 
 All of the destructors in a ``DatatypeUpdateSuffix_`` must be
 for the same constructor, and if they do not cover all of the
