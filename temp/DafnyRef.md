@@ -2919,23 +2919,23 @@ terminate.  However, there are useful ways to establish that an extreme predicat
 and there are ways to make use of one once it has been established.
 
 For any $\mathcal{F}$ as in [#eq-general], I define two infinite series of well-founded
-functions, ${{}^{\flat}\!f}_k$ and ${{}^{\sharp}\!f}_k$
+functions, ${ {}^{\flat}\!f}_k$ and ${ {}^{\sharp}\!f}_k$
 where $k$ ranges over the natural numbers:
 
 <!-- FIXME
 ~ Equation {#eq-least-approx}
-  $${{}^{\flat}\!f}_k(x) = \left\{
+  $${ {}^{\flat}\!f}_k(x) = \left\{
     \begin{array}{ll}
       \mathit{false}         & \textrm{if } k = 0 \\
-      \mathcal{F}({{}^{\flat}\!f}_{k-1})(x) & \textrm{if } k > 0 
+      \mathcal{F}({ {}^{\flat}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
      \right\} $$.
 ~
 ~ Equation {#eq-greatest-approx}
-  $${{}^{\sharp}\!f}_k(x) = \left$\{
+  $${ {}^{\sharp}\!f}_k(x) = \left$\{
     \begin{array}{ll}
       \mathit{true}          & \textrm{if } k = 0 \\
-      \mathcal{F}({{}^{\sharp}\!f}_{k-1})(x) & \textrm{if } k > 0 
+      \mathcal{F}({ {}^{\sharp}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
     \right\} $$.
 ~
@@ -2944,35 +2944,35 @@ where $k$ ranges over the natural numbers:
 These functions are called the _iterates_ of $f$, and I will also refer to them
 as the _prefix predicates_ of $f$ (or the _prefix predicate_ of $f$, if we think
 of $k$ as being a parameter).
-Alternatively, we can define ${{}^{\flat}\!f}_k$ and ${{}^{\sharp}\!f}_k$ without mentioning $x$:
+Alternatively, we can define ${ {}^{\flat}\!f}_k$ and ${ {}^{\sharp}\!f}_k$ without mentioning $x$:
 Let $\bot$ denote the function that always returns `false`$`, let $\top$
 denote the function that always returns `true`, and let a superscript on $\mathcal{F}$ denote
 exponentiation (for example, $\mathcal{F}^0(f) = f$ and $\mathcal{F}^2(f) = \mathcal{F}(\mathcal{F}(f))$).
 Then, [#eq-least-approx] and [#eq-greatest-approx] can be stated equivalently as
-${{}^{\flat}\!f}_k = \mathcal{F}^k(\bot)$ and ${{}^{\sharp}\!f}_k = \mathcal{F}^k(\top)$.
+${ {}^{\flat}\!f}_k = \mathcal{F}^k(\bot)$ and ${ {}^{\sharp}\!f}_k = \mathcal{F}^k(\top)$.
 
 For any solution $f$ to equation [#eq-general], we have, for any $k$ and $\ell$
 such that $k \leq \ell$:
 
 
 ~ Equation {#eq-prefix-postfix}
-  $${{}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
-  {{}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
+  $${ {}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
+  { {}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
   f      \quad\;\dot{\Rightarrow}\;\quad
-  {{}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
-  {{}^{\sharp}\!f}_k$$
+  { {}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
+  { {}^{\sharp}\!f}_k$$
 ~
 
-In other words, every ${{}^{\flat}\!f}_k$ is a _pre-fixpoint_ of $f$ and every ${{}^{\sharp}\!f}_k$ is a _post-fixpoint_
+In other words, every ${ {}^{\flat}\!f}_k$ is a _pre-fixpoint_ of $f$ and every ${ {}^{\sharp}\!f}_k$ is a _post-fixpoint_
 of $f$.  Next, I define two functions, $f^{\downarrow}$ and $f^{\uparrow}$, in
 terms of the prefix predicates:
 
 
 Equation {#eq-least-is-exists}
-$$  f^{\downarrow}(x) \;=\;  \exists k \bullet\; {{}^{\flat}\!f}_k(x) $$
+$$  f^{\downarrow}(x) \;=\;  \exists k \bullet\; { {}^{\flat}\!f}_k(x) $$
 
 Equation {#eq-greatest-is-forall}
- $$ f^{\uparrow}(x) \;=\;  \forall k \bullet\; {{}^{\sharp}\!f}_k(x) $$
+ $$ f^{\uparrow}(x) \;=\;  \forall k \bullet\; { {}^{\sharp}\!f}_k(x) $$
 
 
 By [#eq-prefix-postfix], we also have that $f^{\downarrow}$ is a pre-fixpoint of $\mathcal{F}$ and $f^{\uparrow}$
@@ -3022,14 +3022,14 @@ general form of our proof goal:
 |~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 |   | $f^{\uparrow}(x) \;\Longrightarrow\; R$                                                    |
 | = | &nbsp;&nbsp;&nbsp;&nbsp; { [#eq-least-is-exists] }                        |
-|   | $(\\exists k \bullet\; {{}^{\flat}\!f}_k(x)) \;\Longrightarrow\; R$                              |
+|   | $(\\exists k \bullet\; { {}^{\flat}\!f}_k(x)) \;\Longrightarrow\; R$                              |
 | = | &nbsp;&nbsp;&nbsp;&nbsp; { distribute $\;\Longrightarrow\;$ over $\exists$ to the left } |
-|   | $\forall k \bullet\; ({{}^{\flat}\!f}_k(x) \;\Longrightarrow\; R)$                              |
+|   | $\forall k \bullet\; ({ {}^{\flat}\!f}_k(x) \;\Longrightarrow\; R)$                              |
 
 The last line can be proved by induction over $k$.  So, in our case, we prove
-${{}^{\flat}\!g}_k(x) \;\Longrightarrow\; 0 \leq x \;\wedge\; x \textrm{ even}$ for every $k$.
-If $k = 0$, then ${{}^{\flat}\!g}_k(x)$ is `false`, so our goal holds trivially.
-If $k > 0$, then ${{}^{\flat}\!g}_k(x) = (x = 0 \:\vee\: {{}^{\flat}\!g}_{k-1}(x-2))$.  Our goal holds easily
+${ {}^{\flat}\!g}_k(x) \;\Longrightarrow\; 0 \leq x \;\wedge\; x \textrm{ even}$ for every $k$.
+If $k = 0$, then ${ {}^{\flat}\!g}_k(x)$ is `false`, so our goal holds trivially.
+If $k > 0$, then ${ {}^{\flat}\!g}_k(x) = (x = 0 \:\vee\: { {}^{\flat}\!g}_{k-1}(x-2))$.  Our goal holds easily
 for the first disjunct ($x=0$).  For the other disjunct,
 we apply the induction hypothesis (on the smaller $k-1$ and with $x-2$) and
 obtain $0 \leq (x-2)\;\wedge\; (x-2) \textrm{ even}$, from which our proof goal
@@ -3078,16 +3078,16 @@ general form of our proof goal:
 |~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 |   | $Q \;\Longrightarrow\; f^{\uparrow}(x)$                                                      |
 | = | &nbsp;&nbsp;&nbsp;&nbsp;  { [#eq-greatest-is-forall] }                      |
-|   | $Q \;\Longrightarrow\; \forall k \bullet\; {{}^{\sharp}\!f}_k(x)$                                  |
+|   | $Q \;\Longrightarrow\; \forall k \bullet\; { {}^{\sharp}\!f}_k(x)$                                  |
 | = | &nbsp;&nbsp;&nbsp;&nbsp;  { distribute $\;\Longrightarrow\;$ over $\forall$ to the right } |
-|   | $\forall k \bullet\; Q \;\Longrightarrow\; {{}^{\sharp}\!f}_k(x)$                                  |
+|   | $\forall k \bullet\; Q \;\Longrightarrow\; { {}^{\sharp}\!f}_k(x)$                                  |
 -->
 
 The last line can be proved by induction over $k$.  So, in our case, we prove
 <!--
-$\mathit{true} \;\Longrightarrow\; {{}^{\sharp}\!g}_k(x)$ for every $k$.
-If $k=0$, then ${{}^{\sharp}\!g}_k(x)$ is $\mathit{true}$, so our goal holds trivially.
-If $k > 0$, then ${{}^{\sharp}\!g}_k(x) = (x = 0 \:\vee\: {{}^{\sharp}\!g}_{k-1}(x-2))$.  We establish the second
+$\mathit{true} \;\Longrightarrow\; { {}^{\sharp}\!g}_k(x)$ for every $k$.
+If $k=0$, then ${ {}^{\sharp}\!g}_k(x)$ is $\mathit{true}$, so our goal holds trivially.
+If $k > 0$, then ${ {}^{\sharp}\!g}_k(x) = (x = 0 \:\vee\: { {}^{\sharp}\!g}_{k-1}(x-2))$.  We establish the second
 disjunct by applying the induction hypothesis (on the smaller $k-1$ and with $x-2$).
 -->
 
@@ -3234,7 +3234,7 @@ copredicate G(x: int) { x == 0 || G(x-2) }
 ```
 
 When Dafny receives either of these definitions, it automatically declares the corresponding
-prefix predicates.  Instead of the names ${{}^{\flat}\!g}_k$ and ${{}^{\sharp}\!g}_k$ that I used above, Dafny
+prefix predicates.  Instead of the names ${ {}^{\flat}\!g}_k$ and ${ {}^{\sharp}\!g}_k$ that I used above, Dafny
 names the prefix predicates `g#[k]` and `G#[k]`, respectively, that is, the name of
 the extreme predicate appended with `#`, and the subscript is given as an argument in
 square brackets.  The definition of the prefix predicate derives from the body of
