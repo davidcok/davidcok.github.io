@@ -13,7 +13,7 @@ Separate into files
 
 -->
 
-<!--madoko
+<!-- madoko
 Title       : Dafny Reference Manual
 Title Note  : draft, &date; &time;
 Author      : Richard L. Ford
@@ -113,16 +113,8 @@ Css Header  : body { text-rendering=optimizeLegibility }
 \newcommand{\FBelow}{\ES\dot{\Rightarrow}\ES}
 \newcommand{\least}{^{\downarrow}}
 \newcommand{\greatest}{^{\uparrow}}
-\newcommand{\Dfrac}[2]{%
-  \ooalign{%
-    $\genfrac{}{}{1.8pt}0{#1}{#2}$\cr%
-    $\color{white}\genfrac{}{}{1pt}0{\phantom{#1}}{\phantom{#2}}$}%
-}
-\newcommand{\DfracA}[2]{%
-  \ooalign{%
-    $\genfrac{}{}{1.2pt}0{#1}{#2}$\cr%
-    $\color{white}\genfrac{}{}{0.6pt}0{\phantom{#1}}{\phantom{#2}}$}%
-}
+\newcommand{\Dfrac}[2]{ \ooalign{ $\genfrac{}{}{1.8pt}0{#1}{#2}$\cr $\color{white}\genfrac{}{}{1pt}0{\phantom{#1}}{\phantom{#2}}$} }
+\newcommand{\DfracA}[2]{ \ooalign{ $\genfrac{}{}{1.2pt}0{#1}{#2}$\cr $\color{white}\genfrac{}{}{0.6pt}0{\phantom{#1}}{\phantom{#2}}$} }
 \newcommand{\false}{\mathit{false}}
 \newcommand{\true}{\mathit{true}}
 \newcommand{\fib}{\mathit{fib}}
@@ -140,16 +132,8 @@ Css Header  : body { text-rendering=optimizeLegibility }
 \newcommand\xstrut{\vrule height 9.4pt depth 4.6pt width 0pt\relax}
 \newcommand\xupstrut{\vrule height 9.4pt depth 0pt width 0pt\relax}
 
-\renewcommand{\Dfrac}[2]{%
-  \ooalign{%
-    % first a thick fraction line
-    $\genfrac{}{}{1.4pt}1{\displaystyle #1\strut}{\displaystyle #2\strut}$\cr%
-    % and then a thinner white fraction line on top of it
-    $\color{white}\genfrac{}{}{0.6pt}1{\phantom{\displaystyle #1\strut}}{\phantom{\displaystyle #2\strut}}$}%
-}
-\renewcommand{\dfrac}[2]{%
-   \displaystyle\genfrac{}{}{0.4pt}1{\displaystyle #1}{\displaystyle #2}%
-}
+\renewcommand{\Dfrac}[2]{ \ooalign{ $\genfrac{}{}{1.4pt}1{\displaystyle #1\strut}{\displaystyle #2\strut}$\cr $\color{white}\genfrac{}{}{0.6pt}1{\phantom{\displaystyle #1\strut}}{\phantom{\displaystyle #2\strut}}$} }
+\renewcommand{\dfrac}[2]{ \displaystyle\genfrac{}{}{0.4pt}1{\displaystyle #1}{\displaystyle #2} }
 
 -->
 
