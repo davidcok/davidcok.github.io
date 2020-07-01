@@ -1,19 +1,6 @@
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-<!-- TODO
-Placement of TOC
-Numbered headings
-Some equations
-Equation numbering and references
-Internal links and references
-References/bibliography
-Separate into files
-
--->
-
-<Huge><center>
-Dafny Reference Manual
-</center></Huge>
+# Dafny Reference Manual
 
 Abstract: 
 This is the Dafny reference manual which describes the Dafny programming
