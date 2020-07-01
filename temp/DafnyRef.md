@@ -18,7 +18,7 @@ user understand how to do proofs with Dafny.
 
 # Introduction
 
-Sample math: $a \to b$ \( a \to b \) or $$ a \to \pi $$
+Sample math: $a \to b$ \( a \to b \) or $$ a \to \pi $$ or \[ a \to \pi \]
 
 Dafny [@Leino:Dafny:LPAR16] is a programming language with built-in specification constructs.
 The Dafny static program verifier can be used to verify the functional
