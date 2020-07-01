@@ -1,6 +1,3 @@
-<script async
-  src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
 <!-- TODO
 Placement of TOC
@@ -27,6 +24,8 @@ user understand how to do proofs with Dafny.
 
 
 # Introduction
+
+Sample math: $a \to b$ \( a \to b \)
 
 Dafny [@Leino:Dafny:LPAR16] is a programming language with built-in specification constructs.
 The Dafny static program verifier can be used to verify the functional
