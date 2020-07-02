@@ -2746,12 +2746,12 @@ may fail to terminate, because its _width_ may be infinite.  For example, let $P
 be some predicate defined on the ordinals and let $\mathit{P}_\downarrow$ be a predicate on the
 ordinals defined by the following equation:
 
-\\[\mathit{P}\_\downarrow) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}\_\downarrow(p) \\]
+\\[\mathit{P}\_\downarrow = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}\_\downarrow(p) \\]
 
 
 With $\ll$ as the usual ordering on ordinals, this equation satisfies the decrement
-condition, but evaluating $\mathit{PDownward}(\omega)$ would require evaluating
-$\mathit{PDownward}(n)$ for every natural number $n$.  However, what we are concerned
+condition, but evaluating $\mathit{P}\_\downarrow(\omega)$ would require evaluating
+$\mathit{P}\_\downarrow\_\downarrow(n)$ for every natural number $n$.  However, what we are concerned
 about here is to avoid mathematical inconsistencies, and that is
 indeed a consequence of the decrement condition.
 
@@ -2790,7 +2790,7 @@ In particular, if $Y$ is the set of booleans ordered by implication (`false` $\l
 then the set of predicates over any domain $X$ forms a complete lattice.
 Tarski's Theorem [@Tarski:theorem] tells us that any monotonic function over a
 complete lattice has a least and a greatest fixpoint.  In particular, this means that
-$\\F$ has a least fixpoint and a greatest fixpoint, provided $\mathcal{F}$ is monotonic.
+$\mathcal{F}$ has a least fixpoint and a greatest fixpoint, provided $\mathcal{F}$ is monotonic.
 
 Speaking about the _set of solutions_ in $f$ to [#eq-general] is the same as speaking
 about the _set of fixpoints_ of functor $\mathcal{F}$.  In particular, the least and greatest
@@ -2926,7 +2926,7 @@ where $k$ ranges over the natural numbers:
      \right\} \\].
 ~
 ~ Equation {#eq-greatest-approx}
-  \\[ { {}^{\sharp}\!f}_k(x) = \left$\{
+  \\[ { {}^{\sharp}\!f}_k(x) = \left\\{
     \begin{array}{ll}
       \mathit{true}          & \textrm{if } k = 0 \\
       \mathcal{F}({ {}^{\sharp}\!f}_{k-1})(x) & \textrm{if } k > 0 
@@ -2949,13 +2949,9 @@ For any solution $f$ to equation [#eq-general], we have, for any $k$ and $\ell$
 such that $k \leq \ell$:
 
 
-~ Equation {#eq-prefix-postfix}
-  \\[ { {}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
-  { {}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
-  f      \quad\;\dot{\Rightarrow}\;\quad
-  { {}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
-  { {}^{\sharp}\!f}_k \\]
-~
+Equation {#eq-prefix-postfix}
+\\[ { {}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad { {}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad f      \quad\;\dot{\Rightarrow}\;\quad { {}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad { {}^{\sharp}\!f}_k \\]
+
 
 In other words, every ${ {}^{\flat}\!f}_k$ is a _pre-fixpoint_ of $f$ and every ${ {}^{\sharp}\!f}_k$ is a _post-fixpoint_
 of $f$.  Next, I define two functions, $f^{\downarrow}$ and $f^{\uparrow}$, in
