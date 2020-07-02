@@ -2743,10 +2743,10 @@ that the recursive _depth_ in evaluating $f$
 on any given argument is finite.  That is, there are no infinite descending chains
 of recursive calls.  However, the evaluation of $f$ on a given argument
 may fail to terminate, because its _width_ may be infinite.  For example, let $P$
-be some predicate defined on the ordinals and let $\mathit{P}\downarrow$ be a predicate on the
+be some predicate defined on the ordinals and let $\mathit{P}_\downarrow$ be a predicate on the
 ordinals defined by the following equation:
 
-\\[\mathit{P}\downarrowo) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}\downarrow(p\\]
+\\[\mathit{P}_\downarrow) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}_\downarrow(p) \\]
 
 
 With $\ll$ as the usual ordering on ordinals, this equation satisfies the decrement
