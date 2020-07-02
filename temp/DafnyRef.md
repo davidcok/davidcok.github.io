@@ -2746,7 +2746,7 @@ may fail to terminate, because its _width_ may be infinite.  For example, let $P
 be some predicate defined on the ordinals and let $\mathit{P}_\downarrow$ be a predicate on the
 ordinals defined by the following equation:
 
-\\[\mathit{P}_\downarrow) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}_\downarrow(p) \\]
+\\[\mathit{P}\_\downarrow) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{P}\_\downarrow(p) \\]
 
 
 With $\ll$ as the usual ordering on ordinals, this equation satisfies the decrement
