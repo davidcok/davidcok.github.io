@@ -3,7 +3,7 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(","\\)"]], displayMath: [ ["$$","$$"], ["\\[","\\]"] ]
         }});
 </script>
 
@@ -2698,13 +2698,13 @@ a _predicate_.
 
 For example, the common Fibonacci function over the
 natural numbers can be defined by the equation
-$$\mathit{fib} = \lambda n \bullet\: \mathbf{if}\:n < 2 \:\mathbf{then}\: n \:\mathbf{else}\: \mathit{fib}(n-2) + \mathit{fib}(n-1)$$
+\\[\mathit{fib} = \lambda n \bullet\: \mathbf{if}\:n < 2 \:\mathbf{then}\: n \:\mathbf{else}\: \mathit{fib}(n-2) + \mathit{fib}(n-1)\\]
 
 With the understanding that the argument $n$ is universally
 quantified, we can write this equation equivalently as
 
 ~ Equation {#eq-fib}
-$$\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)$$
+\\[\mathit{fib}(n) = \mathbf{if}\:n < 2\:\mathbf{then}\:n\:\mathbf{else}\:\mathit{fib}(n-2)%2B\mathit{fib}(n-1)\\]
 ~
 
 
@@ -2721,7 +2721,7 @@ to make sure the recursion is well-founded, which roughly means that the
 recursion terminates.  This is done by introducing any well-founded
 relation $\ll$ on the domain of $f$ and making sure that the argument to each recursive
 call goes down in this ordering.  More precisely, if we formulate [#eq-general] as
-$$f(x) = \mathcal{F}{'}(f)$$
+\\[f(x) = \mathcal{F}{'}(f)\\]
 
 then we want to check $E \ll x$ for each call $f(E)$ in $f(x) = \mathcal{F}'(f)$.
 When a function
@@ -2732,7 +2732,7 @@ For example, to check the decrement condition for $\mathit{fib}$
 in [#eq-fib], we can pick $\ll$
 to be the arithmetic less-than relation on natural numbers and check the
 following, for any $n$:
-$$2 \leq n \;\Longrightarrow\; n-2 \ll n \;\wedge\; n-1 \ll n$$
+\\[2 \leq n \;\Longrightarrow\; n-2 \ll n \;\wedge\; n-1 \ll n\\]
 
 Note that we are entitled to use the antecedent 
 $2 \leq n$ because that is the
@@ -2746,7 +2746,7 @@ may fail to terminate, because its _width_ may be infinite.  For example, let $P
 be some predicate defined on the ordinals and let $\mathit{PDownward}$ be a predicate on the
 ordinals defined by the following equation:
 
-$$\mathit{PDownward}(o) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{PDownward}(p)$$
+\\[\mathit{PDownward}(o) = P(o) \;\wedge\; \forall p \bullet\; p \ll o \;\Longrightarrow\; \mathit{PDownward}(p\\]
 
 
 With $\ll$ as the usual ordering on ordinals, this equation satisfies the decrement
@@ -2782,7 +2782,7 @@ a complete lattice $(X \to Y, \dot{\Rightarrow})$, where for any $f,g \colon X \
 
 
 Equation
-$$f \dot{\Rightarrow} q  \;\;\equiv\;\; \forall x \bullet\; f(x) \leq g(x)$$
+\\[f \dot{\Rightarrow} q  \;\;\equiv\;\; \forall x \bullet\; f(x) \leq g(x)\\]
 
 
 
@@ -2814,19 +2814,19 @@ Let me introduce a running example.  Consider the following equation,
 where $x$ ranges over the integers:
 
 ~ Equation {#eq-EvenNat}
-$$  g(x) = (x = 0 \:\vee\: g(x-2))$$
+\\[  g(x) = (x = 0 \:\vee\: g(x-2)) \\]
 ~
 
 This equation has four solutions in $g$.  With $w$ ranging over the integers, they are:
 
 
 Equation
-  $$\begin{array}{r@{}l}
+  \\[ \begin{array}{r@{}l}
   g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; 0 \leq w \;\wedge\; w\textrm{ even}\} \\
   g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; w\textrm{ even}\} \\
   g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; (0 \leq w \;\wedge\; w\textrm{ even}) \:\vee\: w\textrm{ odd}\} \\
   g(x) \;\;\equiv\;\;{}&  x \in \{w \;|\; \mathit{true}\}
-  \end{array}$$
+  \end{array} \\]
 
 
 The first of these is the least solution and the last is the greatest solution.
@@ -2918,20 +2918,20 @@ where $k$ ranges over the natural numbers:
 
 <!-- FIXME
 ~ Equation {#eq-least-approx}
-  $${ {}^{\flat}\!f}_k(x) = \left\{
+  \\[ { {}^{\flat}\!f}_k(x) = \left\{
     \begin{array}{ll}
       \mathit{false}         & \textrm{if } k = 0 \\
       \mathcal{F}({ {}^{\flat}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
-     \right\} $$.
+     \right\} \\].
 ~
 ~ Equation {#eq-greatest-approx}
-  $${ {}^{\sharp}\!f}_k(x) = \left$\{
+  \\[ { {}^{\sharp}\!f}_k(x) = \left$\{
     \begin{array}{ll}
       \mathit{true}          & \textrm{if } k = 0 \\
       \mathcal{F}({ {}^{\sharp}\!f}_{k-1})(x) & \textrm{if } k > 0 
     \end{array}
-    \right\} $$.
+    \right\} \\].
 ~
 -->
 
@@ -2950,11 +2950,11 @@ such that $k \leq \ell$:
 
 
 ~ Equation {#eq-prefix-postfix}
-  $${ {}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
+  \\[ { {}^{\flat}\!f}_k    \quad\;\dot{\Rightarrow}\;\quad
   { {}^{\flat}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
   f      \quad\;\dot{\Rightarrow}\;\quad
   { {}^{\sharp}\!f}_\ell \quad\;\dot{\Rightarrow}\;\quad
-  { {}^{\sharp}\!f}_k$$
+  { {}^{\sharp}\!f}_k \\]
 ~
 
 In other words, every ${ {}^{\flat}\!f}_k$ is a _pre-fixpoint_ of $f$ and every ${ {}^{\sharp}\!f}_k$ is a _post-fixpoint_
@@ -2963,10 +2963,10 @@ terms of the prefix predicates:
 
 
 Equation {#eq-least-is-exists}
-$$  f^{\downarrow}(x) \;=\;  \exists k \bullet\; { {}^{\flat}\!f}_k(x) $$
+\\[  f^{\downarrow}(x) \;=\;  \exists k \bullet\; { {}^{\flat}\!f}_k(x) \\]
 
 Equation {#eq-greatest-is-forall}
- $$ f^{\uparrow}(x) \;=\;  \forall k \bullet\; { {}^{\sharp}\!f}_k(x) $$
+ \\[  f^{\uparrow}(x) \;=\;  \forall k \bullet\; { {}^{\sharp}\!f}_k(x) \\]
 
 
 By [#eq-prefix-postfix], we also have that $f^{\downarrow}$ is a pre-fixpoint of $\mathcal{F}$ and $f^{\uparrow}$
