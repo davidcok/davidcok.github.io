@@ -7,7 +7,7 @@
         }});
 </script>
 
-{::options toc_levels:1..4 ::}
+{::options toc_levels="1..4" ::}
 
 # Dafny Reference Manual
 
